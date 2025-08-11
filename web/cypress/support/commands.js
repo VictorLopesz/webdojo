@@ -28,3 +28,10 @@ Cypress.Commands.add("acessarPagina", () => {
   cy.visit("http://localhost:3000");
   cy.viewport(1440, 900);
 });
+
+Cypress.Commands.add("submeterLogin", (email, senha) => { //passado as variáveis de argumento
+   cy.get("#email").type(email)
+   cy.get("#password").type(senha)
+
+   cy.contains('button', 'Entrar').click()
+})
