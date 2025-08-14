@@ -46,5 +46,8 @@ describe("Formulário de Consultoria", () => {
         .check()
         .should("be.checked");
     });
+
+    cy.get('input[type="file"]')
+      .selectFile('cypress/fixtures/teste.pdf', {force: true})
   });
 });
