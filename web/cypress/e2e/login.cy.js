@@ -1,10 +1,10 @@
 describe("Login", () => {
   beforeEach(() => {
-    cy.acessarPagina();
+    cy.start();
   });
 
   it("Logando com sucesso", () => {
-    cy.submeterLogin('papito@webdojo.com', 'katana123');
+    cy.submitLoginForm('papito@webdojo.com', 'katana123');
 
     cy.wait(300);
 
@@ -21,7 +21,7 @@ describe("Login", () => {
   });
 
   it("Não deve logar com senha incorreta", () => {
-      cy.submeterLogin('papito@webdojo.com', '2352');
+      cy.submitLoginForm('papito@webdojo.com', '2352');
 
     cy.wait(1000)
 
@@ -31,7 +31,7 @@ describe("Login", () => {
   });
 
     it("Não deve logar com email incorreta", () => {
-    cy.submeterLogin('papi@webjo.com', 'katana123');
+    cy.submitLoginForm('papi@webjo.com', 'katana123');
 
     cy.wait(1000)
 
