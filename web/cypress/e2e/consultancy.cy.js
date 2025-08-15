@@ -41,19 +41,47 @@ describe("Formulário de Consultoria", () => {
     ];
 
     discoveryChannels.forEach((channel) => {
-      cy.contains("label", channel)
-        .find("input")
-        .check()
-        .should("be.checked");
+      cy.contains("label", channel).find("input").check().should("be.checked");
     });
 
-    cy.get('input[type="file"]')
-      .selectFile('cypress/fixtures/teste.pdf', {force: true})
-
-    cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
-    .type("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-
+    cy.get('input[type="file"]').selectFile("cypress/fixtures/teste.pdf", {
+      force: true,
     });
 
+    cy.get(
+      'textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]'
+    ).type("Lorem Ipsum is simply.");
 
+    const techs = [
+      "Cypress",
+      "Selenium",
+      "Playwrite",
+      "Robot Framework"
+    ];
+
+    techs.forEach((tech) => {
+      cy.get('input[placeholder="Digite uma tecnologia e pressione Enter"]')
+        .type(tech)
+        .type("{enter}");
+
+      cy.contains('label', 'Tecnologias')
+        .parent()
+        .contains('span', tech)
+        .should('be.visible');
+    });
+
+    cy.contains('label', 'termos de uso')
+      .find('input')
+      .check()
+
+    cy.contains('label', 'Li e aceito os')
+      .find('a', 'termos de uso')
+      .click()
+
+    cy.contains('button', 'Enviar formulário')
+      .click()
+
+    cy.contains('Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
+      .should('be.visible')
+  });
 });

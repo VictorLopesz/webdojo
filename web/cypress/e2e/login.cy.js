@@ -4,7 +4,7 @@ describe("Login", () => {
   });
 
   it("Logando com sucesso", () => {
-    cy.submitLoginForm('papito@webdojo.com', 'katana123');
+    cy.submitLoginForm("papito@webdojo.com", "katana123");
 
     cy.wait(300);
 
@@ -21,22 +21,22 @@ describe("Login", () => {
   });
 
   it("Não deve logar com senha incorreta", () => {
-      cy.submitLoginForm('papito@webdojo.com', '2352');
+    cy.submitLoginForm("papito@webdojo.com", "2352");
 
-    cy.wait(1000)
+    cy.wait(1000);
 
-    cy.get('.title')
-    .should('be.visible')
-    .and('have.text', 'Acesso negado! Tente novamente.')
+    cy.get(".title")
+      .should("be.visible")
+      .and("have.text", "Acesso negado! Tente novamente.");
   });
 
-    it("Não deve logar com email incorreta", () => {
-    cy.submitLoginForm('papi@webjo.com', 'katana123');
+  it("Não deve logar com email incorreta", () => {
+    cy.submitLoginForm("papi@webjo.com", "katana123");
 
-    cy.wait(1000)
+    cy.wait(1000);
 
-    cy.get('.title')
-    .should('be.visible')
-    .and('have.text', 'Acesso negado! Tente novamente.')
+    cy.get(".title")
+      .should("be.visible")
+      .and("have.text", "Acesso negado! Tente novamente.");
   });
 });
